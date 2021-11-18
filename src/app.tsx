@@ -3,9 +3,7 @@ import { Circle, Dot, Rect } from "./common/types";
 import CircleElement from "./elements/circle-element";
 import DotElement from "./elements/dot-element";
 import RectElement from "./elements/rect-element";
-import CircleForm from "./forms/circle-form/circle-form";
-import DotForm from "./forms/dot-form/dot-form";
-import RectForm from "./forms/rect-form/rect-form";
+import FormForEverything from "./forms/form-for-everything";
 import css from "./app.module.scss";
 
 const getDefaultRectValue = (): Rect => ({
@@ -25,29 +23,63 @@ const getDefaultCircleValue = (): Circle => ({
 });
 
 function App() {
-  const [rectState, setReactState] = useState(getDefaultRectValue());
+  // curently editing type
+  const [formType, setFormType] = useState<"dot" | "circle" | "rect">("dot");
+
+  const [rectState, setRectState] = useState(getDefaultRectValue());
   const [dotState, setDotState] = useState(getDefaultDotValue());
   const [circleState, setCircleState] = useState(getDefaultCircleValue());
 
   return (
     <div className={css.main}>
+      <div>
+        <div
+          className={css.options}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setFormType(event?.target.value as any);
+          }}
+        >
+          <input
+            type="radio"
+            value="dot"
+            name="type"
+            checked={formType === "dot"}
+          />
+          Dot
+          <br />
+          <input
+            type="radio"
+            value="circle"
+            name="type"
+            checked={formType === "circle"}
+          />
+          Circle
+          <br />
+          <input
+            type="radio"
+            value="rect"
+            name="type"
+            checked={formType === "rect"}
+          />
+          Rect
+          <br />
+        </div>
+      </div>
       <div className={css.form}>
-        <h1>Forms</h1>
-
-        <h3>Rect form</h3>
-        <RectForm value={rectState} onChange={setReactState} />
-
-        <h3>Circle form</h3>
-        <CircleForm value={circleState} onChange={setCircleState} />
-
-        <h3>Dot form</h3>
-        <DotForm value={dotState} onChange={setDotState} />
+        <FormForEverything
+          dotValue={dotState}
+          circleValue={circleState}
+          rectValue={rectState}
+          onDotChange={setDotState}
+          onCircleChange={setCircleState}
+          onRectChange={setRectState}
+          type={formType}
+        />
       </div>
       <div>
-        <h1>Elements</h1>
-        <RectElement value={rectState} />
-        <CircleElement value={circleState} />
-        <DotElement value={dotState} />
+        {formType === "rect" && <RectElement value={rectState} />}
+        {formType === "circle" && <CircleElement value={circleState} />}
+        {formType === "dot" && <DotElement value={dotState} />}
       </div>
     </div>
   );
