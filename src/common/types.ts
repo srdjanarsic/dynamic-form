@@ -1,15 +1,16 @@
-export interface Dot {
-  x: number;
-  y: number;
+export interface Id {
+  id: number;
 }
 
-export interface Rect {
+export interface Rect extends Id {
+  type: "rect";
   width: number;
   height: number;
   filled: boolean;
 }
 
-export interface Circle {
+export interface Circle extends Id {
+  type: "circle";
   radius: number;
   filled: boolean;
 }

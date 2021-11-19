@@ -13,7 +13,7 @@ const RectElement: React.FC<RectElementProps> = (props) => {
         position: "relative",
         border: "1px solid red",
         width: `500px`,
-        height: `150px`,
+        height: `300px`,
       }}
     >
       <strong>Rect</strong>

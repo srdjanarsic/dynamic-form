@@ -3,6 +3,7 @@ import { Circle } from "../../common/types";
 import { castToInt } from "../../common/utils";
 import CheckboxInput from "../../library/checkbox-input/checkbox-input";
 import TextInput from "../../library/text-input/text-input";
+import FormInfo from "../common/form-info";
 
 export interface RectFormProps {
   value: Circle;
@@ -13,6 +14,7 @@ const CircleForm: React.FC<RectFormProps> = (props) => {
   const { value, onChange } = props;
   return (
     <>
+      <FormInfo value={value} />
       <div>
         Radius:
         <TextInput

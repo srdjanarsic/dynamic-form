@@ -13,7 +13,7 @@ const CircleElement: React.FC<CircleElementProps> = (props) => {
         position: "relative",
         border: "1px solid green",
         width: `500px`,
-        height: `150px`,
+        height: `300px`,
       }}
     >
       <strong>Circle</strong>
